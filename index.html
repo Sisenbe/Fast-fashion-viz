@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The True Cost of Fast Fashion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            border: "hsl(var(--border))",
+            input: "hsl(var(--input))",
+            ring: "hsl(var(--ring))",
+            background: "hsl(var(--background))",
+            foreground: "hsl(var(--foreground))",
+            primary: { DEFAULT: "hsl(var(--primary))", foreground: "hsl(var(--primary-foreground))" },
+            secondary: { DEFAULT: "hsl(var(--secondary))", foreground: "hsl(var(--secondary-foreground))" },
+            muted: { DEFAULT: "hsl(var(--muted))", foreground: "hsl(var(--muted-foreground))" },
+            accent: { DEFAULT: "hsl(var(--accent))", foreground: "hsl(var(--accent-foreground))" },
+            card: { DEFAULT: "hsl(var(--card))", foreground: "hsl(var(--card-foreground))" },
+            popover: { DEFAULT: "hsl(var(--popover))", foreground: "hsl(var(--popover-foreground))" },
+            destructive: { DEFAULT: "hsl(var(--destructive))", foreground: "hsl(var(--destructive-foreground))" },
+          },
+          borderRadius: {
+            lg: "var(--radius)",
+            md: "calc(var(--radius) - 2px)",
+            sm: "calc(var(--radius) - 4px)",
+          },
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 5.9% 10%;
+        --radius: 0.5rem;
+      }
+      .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 5.9% 10%;
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+        --ring: 240 4.9% 83.9%;
+        --radius: 0.5rem;
+      }
+    }
+    @layer base {
+      * { @apply border-border; }
+      body { @apply bg-background text-foreground; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body class="min-h-screen font-sans antialiased">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div class="flex h-14 items-center justify-between px-6">
+      <span class="text-sm font-semibold tracking-tight">Fast Fashion Impact</span>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="text-sm font-medium text-foreground transition-colors hover:text-foreground/80">Visualization</a>
+        <a href="documentation.html" class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground/80">Documentation</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Page header -->
+  <header class="py-8 text-center">
+    <h1 class="text-2xl font-bold tracking-tight sm:text-3xl">What Is the True Cost of Fast Fashion?</h1>
+    <p class="mx-auto mt-2 max-w-2xl text-sm text-muted-foreground">Every garment carries hidden costs beyond its price tag. Explore the environmental damage, human toll, and financial reality behind the world's largest fast-fashion brands.</p>
+  </header>
+
+  <!-- View tabs -->
+  <div class="flex items-center justify-center gap-2 px-6 pb-4" id="view-tabs">
+    <button data-view="environmental" class="view-tab active inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v19m-7-7 7 7 7-7M5 12a7 7 0 0 1 14 0" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Environmental Cost
+    </button>
+    <button data-view="human" class="view-tab inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zm14 10v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Human Cost
+    </button>
+    <button data-view="financial" class="view-tab inline-flex items-center gap-2 rounded-md px-4 py-2 text-sm font-medium transition-colors">
+      <svg class="h-4 w-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      Financial Cost
+    </button>
+  </div>
+
+  <!-- Filters bar -->
+  <div class="flex flex-wrap items-end justify-center gap-4 border-y bg-muted/40 px-6 py-3" id="controls">
+    <div class="flex flex-col gap-1">
+      <label for="brand-filter" class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Brand</label>
+      <select id="brand-filter" class="h-9 rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"><option value="ALL">All Brands</option></select>
+    </div>
+    <div class="flex flex-col gap-1">
+      <label for="country-filter" class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Country</label>
+      <select id="country-filter" class="h-9 rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"><option value="ALL">All Countries</option></select>
+    </div>
+    <div class="flex flex-col gap-1">
+      <label for="year-min" class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Year Min</label>
+      <input type="number" id="year-min" class="h-9 w-[72px] rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2" />
+    </div>
+    <div class="flex flex-col gap-1">
+      <label for="year-max" class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Year Max</label>
+      <input type="number" id="year-max" class="h-9 w-[72px] rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2" />
+    </div>
+  </div>
+
+  <!-- Chart description -->
+  <div class="px-6 pt-5">
+    <h2 id="chart-title" class="text-lg font-semibold tracking-tight"></h2>
+    <p id="chart-desc" class="mt-1 max-w-3xl text-sm text-muted-foreground"></p>
+  </div>
+
+  <!-- Legend -->
+  <div id="legend" class="flex flex-wrap gap-3 px-6 pt-3 text-xs"></div>
+
+  <!-- Main viz area -->
+  <div class="px-6 py-4">
+    <div class="flex flex-col gap-6 lg:flex-row lg:items-start">
+      <!-- Chart -->
+      <div id="chart-panel" class="min-w-0 flex-1"></div>
+      <!-- Side panel -->
+      <div id="side-panel" class="w-full shrink-0 overflow-y-auto rounded-lg border bg-card p-4 shadow-sm lg:w-80" style="max-height:560px">
+        <h3 class="mb-3 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Key Metrics</h3>
+        <div id="summary-grid" class="mb-4 grid grid-cols-2 gap-2"></div>
+        <div id="takeaway" class="rounded-md border border-border/50 bg-muted/50 p-3 text-sm text-muted-foreground"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tooltip -->
+  <div id="tooltip" class="pointer-events-none absolute z-[200] max-w-[280px] rounded-lg border bg-popover p-3 text-xs leading-relaxed text-popover-foreground opacity-0 shadow-lg transition-opacity duration-100"></div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Documentation — The True Cost of Fast Fashion</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            border: "hsl(var(--border))",
+            input: "hsl(var(--input))",
+            ring: "hsl(var(--ring))",
+            background: "hsl(var(--background))",
+            foreground: "hsl(var(--foreground))",
+            primary: { DEFAULT: "hsl(var(--primary))", foreground: "hsl(var(--primary-foreground))" },
+            secondary: { DEFAULT: "hsl(var(--secondary))", foreground: "hsl(var(--secondary-foreground))" },
+            muted: { DEFAULT: "hsl(var(--muted))", foreground: "hsl(var(--muted-foreground))" },
+            accent: { DEFAULT: "hsl(var(--accent))", foreground: "hsl(var(--accent-foreground))" },
+            card: { DEFAULT: "hsl(var(--card))", foreground: "hsl(var(--card-foreground))" },
+            popover: { DEFAULT: "hsl(var(--popover))", foreground: "hsl(var(--popover-foreground))" },
+            destructive: { DEFAULT: "hsl(var(--destructive))", foreground: "hsl(var(--destructive-foreground))" },
+          },
+          borderRadius: {
+            lg: "var(--radius)",
+            md: "calc(var(--radius) - 2px)",
+            sm: "calc(var(--radius) - 4px)",
+          },
+          fontFamily: {
+            sans: ["Inter", "ui-sans-serif", "system-ui", "sans-serif"],
+          },
+        },
+      },
+    };
+  </script>
+  <style type="text/tailwindcss">
+    @layer base {
+      :root {
+        --background: 0 0% 100%;
+        --foreground: 240 10% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 240 10% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 240 10% 3.9%;
+        --primary: 240 5.9% 10%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 240 4.8% 95.9%;
+        --secondary-foreground: 240 5.9% 10%;
+        --muted: 240 4.8% 95.9%;
+        --muted-foreground: 240 3.8% 46.1%;
+        --accent: 240 4.8% 95.9%;
+        --accent-foreground: 240 5.9% 10%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 5.9% 90%;
+        --input: 240 5.9% 90%;
+        --ring: 240 5.9% 10%;
+        --radius: 0.5rem;
+      }
+      .dark {
+        --background: 240 10% 3.9%;
+        --foreground: 0 0% 98%;
+        --card: 240 10% 3.9%;
+        --card-foreground: 0 0% 98%;
+        --popover: 240 10% 3.9%;
+        --popover-foreground: 0 0% 98%;
+        --primary: 0 0% 98%;
+        --primary-foreground: 240 5.9% 10%;
+        --secondary: 240 3.7% 15.9%;
+        --secondary-foreground: 0 0% 98%;
+        --muted: 240 3.7% 15.9%;
+        --muted-foreground: 240 5% 64.9%;
+        --accent: 240 3.7% 15.9%;
+        --accent-foreground: 0 0% 98%;
+        --destructive: 0 62.8% 30.6%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 240 3.7% 15.9%;
+        --input: 240 3.7% 15.9%;
+        --ring: 240 4.9% 83.9%;
+        --radius: 0.5rem;
+      }
+    }
+    @layer base {
+      * { @apply border-border; }
+      body { @apply bg-background text-foreground; }
+    }
+  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body class="min-h-screen font-sans antialiased">
+
+  <!-- Navigation -->
+  <nav class="sticky top-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+    <div class="flex h-14 items-center justify-between px-6">
+      <span class="text-sm font-semibold tracking-tight">Fast Fashion Impact</span>
+      <div class="flex items-center gap-6">
+        <a href="index.html" class="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground/80">Visualization</a>
+        <a href="documentation.html" class="text-sm font-medium text-foreground transition-colors hover:text-foreground/80">Documentation</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="mx-auto max-w-3xl px-6 py-10">
+
+    <header class="mb-10">
+      <h1 class="text-3xl font-bold tracking-tight">Project Documentation</h1>
+      <p class="mt-2 text-muted-foreground">Interactive visualization of the environmental, labor, and social costs of fast fashion, built with D3.js.</p>
+    </header>
+
+    <!-- Dataset -->
+    <section class="mb-10">
+      <h2 class="mb-3 text-xl font-semibold tracking-tight">Dataset</h2>
+      <p class="text-muted-foreground">
+        The dataset used is
+        <a href="https://www.kaggle.com/datasets/khushikyad001/the-true-cost-of-fast-fashion-impact" target="_blank" rel="noopener" class="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">
+          The True Cost of Fast Fashion Impact</a>
+        by Khushi Yadav on Kaggle (MIT license). It contains 3,000 records across 25 attributes covering
+        brand identity, production volume, environmental impact (carbon, water, landfill), labor conditions
+        (wages, working hours, child-labor incidents), social-media attention, sentiment, and sustainability /
+        ethics scores.
+      </p>
+    </section>
+
+    <!-- Design Process -->
+    <section class="mb-10">
+      <h2 class="mb-3 text-xl font-semibold tracking-tight">Design Process</h2>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Initial Exploration</h3>
+      <p class="text-muted-foreground">
+        The project began with examining the dataset columns to identify natural question clusters:
+        environmental cost vs. production scale, labor conditions vs. brand, and sustainability scores vs.
+        social-media sentiment. Early paper sketches explored a small-multiples layout (one chart per brand),
+        a parallel-coordinates view, and a single scatterplot with dropdown-driven axes.
+      </p>
+
+      <div class="my-6 rounded-lg border-2 border-dashed p-8 text-center text-sm text-muted-foreground">
+        [Insert scanned sketch images here &mdash; e.g., <code class="rounded bg-muted px-1.5 py-0.5 text-xs">sketches/sketch-1.jpg</code>]
+      </div>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Iteration</h3>
+      <p class="text-muted-foreground">
+        The small-multiples approach was discarded because 6+ brands times 20+ numeric columns made the grid
+        unwieldy. Parallel coordinates were explored but proved difficult to brush precisely with many
+        overlapping polylines. The final design settled on a <strong class="font-semibold text-foreground">brushable scatterplot</strong> with
+        user-selectable axes and color encoding &mdash; a flexible yet focused layout that lets the viewer pose and
+        answer their own comparison questions.
+      </p>
+    </section>
+
+    <!-- Design Rationale -->
+    <section class="mb-10">
+      <h2 class="mb-3 text-xl font-semibold tracking-tight">Design Rationale</h2>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Chart Type &mdash; Brushable Scatterplot</h3>
+      <p class="text-muted-foreground">
+        A scatterplot was chosen because the core questions involve correlations between two continuous
+        variables (e.g., production volume vs. carbon emissions). The brush interaction (D3
+        <code class="rounded bg-muted px-1.5 py-0.5 text-xs">d3.brush()</code>) lets users select a rectangular region and instantly see summary statistics
+        for that subset, supporting rapid hypothesis testing without leaving the page.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Axis Dropdowns</h3>
+      <p class="text-muted-foreground">
+        With 21 numeric attributes, hard-coding a single pair would limit exploration. Dropdown menus for
+        both X and Y axes let the user pivot freely &mdash; from environmental metrics to labor metrics to social
+        attention &mdash; turning one chart into dozens of possible views.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Color Encoding</h3>
+      <p class="text-muted-foreground">
+        Color is mapped to a categorical field (Brand by default, switchable to Country or Sentiment Label).
+        The Tableau-10 palette was chosen for perceptual distinctness. Color answers the &ldquo;which group?&rdquo;
+        question at a glance and clusters in the scatterplot become immediately identifiable.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Side Panel and Summary Statistics</h3>
+      <p class="text-muted-foreground">
+        The right-hand summary panel shows aggregate statistics (mean carbon, water, wage, sustainability,
+        landfill, ethical rating) for whatever subset is currently brushed, or the entire filtered dataset
+        when no brush is active. This dual-level detail (overview + selection) follows Shneiderman&rsquo;s
+        &ldquo;overview first, zoom and filter, details on demand&rdquo; mantra.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Filters</h3>
+      <p class="text-muted-foreground">
+        Top-bar filters for Brand, Country, and Year range let users narrow the dataset before brushing.
+        This prevents information overload when the user cares about a single brand or time period.
+      </p>
+    </section>
+
+    <!-- Findings -->
+    <section class="mb-10">
+      <h2 class="mb-3 text-xl font-semibold tracking-tight">Findings</h2>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Finding 1: Production Volume and Carbon Emissions</h3>
+      <p class="text-muted-foreground">
+        Setting X&nbsp;=&nbsp;Production (tonnes/mo) and Y&nbsp;=&nbsp;Carbon Emissions (tCO&#8322;e) reveals a roughly positive
+        relationship, but with substantial scatter &mdash; some brands achieve high output with comparatively
+        lower emissions, while others show disproportionately high emissions at moderate production levels.
+      </p>
+      <div class="my-6 rounded-lg border-2 border-dashed p-8 text-center text-sm text-muted-foreground">
+        [Insert screenshot of Production vs. Carbon scatterplot here]
+      </div>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Finding 2: Sustainability vs. Environmental Cost</h3>
+      <p class="text-muted-foreground">
+        Plotting Sustainability Score against Env Cost Index shows an expected negative trend: higher
+        sustainability scores correlate with lower environmental cost indices. However, the relationship
+        is noisy, suggesting that sustainability scores alone do not fully capture real environmental
+        impact.
+      </p>
+      <div class="my-6 rounded-lg border-2 border-dashed p-8 text-center text-sm text-muted-foreground">
+        [Insert screenshot here]
+      </div>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Finding 3: Worker Wages Across Countries</h3>
+      <p class="text-muted-foreground">
+        Using the Country color encoding with Avg Worker Wage on the Y-axis highlights geographic pay
+        disparities: records from certain countries cluster at markedly lower wage levels. Brushing
+        these clusters confirms that low-wage records also tend to have higher working hours per week.
+      </p>
+      <div class="my-6 rounded-lg border-2 border-dashed p-8 text-center text-sm text-muted-foreground">
+        [Insert screenshot here]
+      </div>
+    </section>
+
+    <!-- Video -->
+    <section class="mb-10">
+      <h2 class="mb-3 text-xl font-semibold tracking-tight">Video Demonstration</h2>
+      <p class="mb-4 text-muted-foreground">
+        A 2&ndash;4 minute screen-capture video with narration showing the visualization in use.
+      </p>
+      <div class="relative overflow-hidden rounded-lg bg-muted" style="padding-bottom:56.25%">
+        <!-- Replace YOUR_VIDEO_ID with your YouTube video ID after recording -->
+        <iframe
+          class="absolute inset-0 h-full w-full"
+          src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+          title="Visualization Demo"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
+      </div>
+      <p class="mt-2 text-xs text-muted-foreground">
+        Replace <code class="rounded bg-muted px-1.5 py-0.5 text-xs">YOUR_VIDEO_ID</code> in the page source with your actual YouTube video ID after uploading.
+      </p>
+    </section>
+
+    <!-- Deployment -->
+    <section class="mb-10">
+      <h2 class="mb-3 text-xl font-semibold tracking-tight">Deployment</h2>
+      <p class="mb-3 text-muted-foreground">
+        This project is hosted on GitHub Pages. To deploy your own copy:
+      </p>
+      <ol class="list-decimal space-y-2 pl-6 text-muted-foreground">
+        <li>Create a public GitHub repository.</li>
+        <li>Push all project files (including the <code class="rounded bg-muted px-1.5 py-0.5 text-xs">data/</code> folder with the CSV).</li>
+        <li>In the repository Settings &rarr; Pages, set the source to the <strong class="font-semibold text-foreground">main</strong> branch root.</li>
+        <li>Your site will be live at <code class="rounded bg-muted px-1.5 py-0.5 text-xs">https://&lt;username&gt;.github.io/&lt;repo-name&gt;/</code>.</li>
+      </ol>
+    </section>
+
+  </main>
+
+</body>
+</html>

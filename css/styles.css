@@ -1,0 +1,45 @@
+/* D3-specific styles that Tailwind utility classes cannot handle */
+
+.dot {
+  transition: opacity 0.15s;
+}
+
+.dot.faded {
+  opacity: 0.12;
+}
+
+.brush .selection {
+  fill: hsl(var(--primary));
+  fill-opacity: 0.15;
+  stroke: hsl(var(--primary));
+}
+
+/* View tab buttons */
+.view-tab {
+  background: transparent;
+  color: hsl(var(--muted-foreground));
+  border: 1px solid transparent;
+  cursor: pointer;
+}
+
+.view-tab:hover {
+  background: hsl(var(--muted));
+  color: hsl(var(--foreground));
+}
+
+.view-tab.active {
+  background: hsl(var(--secondary));
+  color: hsl(var(--foreground));
+  border-color: hsl(var(--border));
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+}
+
+/* Bar chart hover */
+.bar {
+  transition: opacity 0.15s;
+  cursor: pointer;
+}
+
+.bar:hover {
+  opacity: 1 !important;
+}
