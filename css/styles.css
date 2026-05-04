@@ -1,5 +1,12 @@
 /* D3-specific styles that Tailwind utility classes cannot handle */
 
+/* Native select: hide OS chevron so Tailwind Plus–style chevron SVG shows (matches tailwindcss.com/plus select menus pattern) */
+select.ui-select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
 .dot {
   transition: opacity 0.15s;
 }

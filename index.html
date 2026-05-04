@@ -128,23 +128,43 @@
     </button>
   </div>
 
-  <!-- Filters bar -->
-  <div class="flex flex-wrap items-end justify-center gap-4 border-y bg-muted/40 px-6 py-3" id="controls">
-    <div class="flex flex-col gap-1">
-      <label for="brand-filter" class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Brand</label>
-      <select id="brand-filter" class="h-9 rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"><option value="ALL">All Brands</option></select>
-    </div>
-    <div class="flex flex-col gap-1">
-      <label for="country-filter" class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Country</label>
-      <select id="country-filter" class="h-9 rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2"><option value="ALL">All Countries</option></select>
-    </div>
-    <div class="flex flex-col gap-1">
-      <label for="year-min" class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Year Min</label>
-      <input type="number" id="year-min" class="h-9 w-[72px] rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2" />
-    </div>
-    <div class="flex flex-col gap-1">
-      <label for="year-max" class="text-[11px] font-medium uppercase tracking-wider text-muted-foreground">Year Max</label>
-      <input type="number" id="year-max" class="h-9 w-[72px] rounded-md border border-input bg-background px-3 text-sm ring-offset-background focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2" />
+  <!-- Filters: Tailwind Plus–style “simple native” selects + matching inputs (see tailwindcss.com/plus → Forms → Select Menus) -->
+  <div class="border-y bg-muted/40 px-6 py-5" id="controls">
+    <div class="mx-auto flex max-w-5xl flex-wrap items-end justify-center gap-x-8 gap-y-5">
+      <div class="w-full sm:w-56 sm:min-w-[14rem]">
+        <label for="brand-filter" class="block text-sm font-medium leading-6 text-foreground">Brand</label>
+        <div class="relative mt-2">
+          <select id="brand-filter" class="ui-select block w-full rounded-md border-0 bg-background py-2 pl-3 pr-10 text-sm text-foreground shadow-sm ring-1 ring-inset ring-border focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6">
+            <option value="ALL">All brands</option>
+          </select>
+          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2" aria-hidden="true">
+            <svg class="h-5 w-5 text-muted-foreground" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+          </span>
+        </div>
+      </div>
+      <div class="w-full sm:w-56 sm:min-w-[14rem]">
+        <label for="country-filter" class="block text-sm font-medium leading-6 text-foreground">Country</label>
+        <div class="relative mt-2">
+          <select id="country-filter" class="ui-select block w-full rounded-md border-0 bg-background py-2 pl-3 pr-10 text-sm text-foreground shadow-sm ring-1 ring-inset ring-border focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6">
+            <option value="ALL">All countries</option>
+          </select>
+          <span class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2" aria-hidden="true">
+            <svg class="h-5 w-5 text-muted-foreground" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.94a.75.75 0 111.08 1.04l-4.25 4.5a.75.75 0 01-1.08 0l-4.25-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd" /></svg>
+          </span>
+        </div>
+      </div>
+      <div class="w-full sm:w-28 sm:min-w-[7rem]">
+        <label for="year-min" class="block text-sm font-medium leading-6 text-foreground">Year min</label>
+        <div class="relative mt-2">
+          <input type="number" id="year-min" class="block w-full rounded-md border-0 bg-background py-2 pl-3 pr-3 text-sm text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6" />
+        </div>
+      </div>
+      <div class="w-full sm:w-28 sm:min-w-[7rem]">
+        <label for="year-max" class="block text-sm font-medium leading-6 text-foreground">Year max</label>
+        <div class="relative mt-2">
+          <input type="number" id="year-max" class="block w-full rounded-md border-0 bg-background py-2 pl-3 pr-3 text-sm text-foreground shadow-sm ring-1 ring-inset ring-border placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-inset focus:ring-ring sm:text-sm sm:leading-6" />
+        </div>
+      </div>
     </div>
   </div>
 
