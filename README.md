@@ -26,7 +26,7 @@ If `origin` already exists, use `git remote set-url origin <url>` instead.
 In the repo on GitHub: **Settings** → **Pages** → **Build and deployment**:
 
 - Source: **Deploy from a branch**
-- Branch: **main** / **/ (root)**
+- Branch: **main** / **/** (GitHub labels this as **/ (root)** — the site files live at the repository root, not in `/docs`)
 
 Save and wait for the green check / “Your site is live at …” URL (often `https://<username>.github.io/<repo>/`).
 
