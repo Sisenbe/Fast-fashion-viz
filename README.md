@@ -10,7 +10,7 @@ On GitHub: [Create a new repository](https://github.com/new) (no README, no .git
 
 ### 2. Push this project from your machine
 
-From this folder:
+This repo is already initialized on `main` with an initial commit. From this folder:
 
 ```bash
 git remote add origin https://github.com/<your-username>/<your-repo>.git
@@ -18,6 +18,8 @@ git push -u origin main
 ```
 
 If `origin` already exists, use `git remote set-url origin <url>` instead.
+
+**Note:** Creating the empty GitHub repository must be done in the browser (or with the GitHub CLI) before `git push` will succeed.
 
 ### 3. Enable GitHub Pages
 
