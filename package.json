@@ -1,0 +1,7 @@
+{
+  "name": "fast-fashion-viz",
+  "private": true,
+  "scripts": {
+    "preview": "node preview-server.mjs"
+  }
+}

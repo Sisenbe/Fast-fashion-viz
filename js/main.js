@@ -34,9 +34,9 @@
         "and landfill waste across brands in the filtered dataset.",
       chartType: "bar-multiples",
       metrics: [
-        { field: "Carbon_Emissions_tCO2e", label: "Carbon Emissions (tCO\u2082e)", color: "#ef4444" },
-        { field: "Water_Usage_Million_Litres", label: "Water Usage (M Litres)", color: "#3b82f6" },
-        { field: "Landfill_Waste_Tonnes", label: "Landfill Waste (tonnes)", color: "#f59e0b" },
+        { field: "Carbon_Emissions_tCO2e", label: "Carbon Emissions (tCO\u2082e)", color: "#fb7185" },
+        { field: "Water_Usage_Million_Litres", label: "Water Usage (M Litres)", color: "#5eead4" },
+        { field: "Landfill_Waste_Tonnes", label: "Landfill Waste (tonnes)", color: "#fcd34d" },
       ],
       summary: [
         { label: "Avg Carbon (tCO\u2082e)", field: "Carbon_Emissions_tCO2e" },
@@ -132,6 +132,66 @@
   const tooltip = d3.select("#tooltip");
   const chartPanel = d3.select("#chart-panel");
 
+  // #region agent log
+  fetch("http://127.0.0.1:7721/ingest/3fc6fdd5-21c3-46a0-9e36-75f77779b17c", {
+    method: "POST",
+    headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "41b7ff" },
+    body: JSON.stringify({
+      sessionId: "41b7ff",
+      location: "main.js:boot",
+      message: "page context",
+      data: {
+        protocol: typeof location !== "undefined" ? location.protocol : "",
+        href: typeof location !== "undefined" ? location.href : "",
+        origin: typeof location !== "undefined" ? location.origin : "",
+      },
+      timestamp: Date.now(),
+      hypothesisId: "H1",
+      runId: "pre-fix",
+    }),
+  }).catch(function () {});
+  window.addEventListener("error", function (ev) {
+    fetch("http://127.0.0.1:7721/ingest/3fc6fdd5-21c3-46a0-9e36-75f77779b17c", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "41b7ff" },
+      body: JSON.stringify({
+        sessionId: "41b7ff",
+        location: "main.js:window.onerror",
+        message: String(ev && ev.message),
+        data: { filename: ev && ev.filename, lineno: ev && ev.lineno },
+        timestamp: Date.now(),
+        hypothesisId: "H4",
+        runId: "pre-fix",
+      }),
+    }).catch(function () {});
+  });
+  // #endregion
+
+  if (typeof location !== "undefined" && location.protocol === "file:") {
+    var banner =
+      '<div role="alert" class="border-b border-destructive/40 bg-destructive/15 px-6 py-3 text-center text-sm text-foreground">' +
+      "<strong class=\"font-semibold\">Local preview:</strong> This page was opened as a file (<code class=\"rounded bg-muted px-1 py-0.5 text-xs\">file://</code>). " +
+      "Browsers block loading the CSV that way. From this project folder run <code class=\"rounded bg-muted px-1 py-0.5 text-xs\">npm run preview</code> " +
+      "then open <code class=\"rounded bg-muted px-1 py-0.5 text-xs\">http://localhost:8080/</code>, or use <code class=\"rounded bg-muted px-1 py-0.5 text-xs\">python3 -m http.server 8080</code> if Python works on your machine." +
+      "</div>";
+    document.body.insertAdjacentHTML("afterbegin", banner);
+    // #region agent log
+    fetch("http://127.0.0.1:7721/ingest/3fc6fdd5-21c3-46a0-9e36-75f77779b17c", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "41b7ff" },
+      body: JSON.stringify({
+        sessionId: "41b7ff",
+        location: "main.js:fileBanner",
+        message: "file_protocol_banner_shown",
+        data: {},
+        timestamp: Date.now(),
+        hypothesisId: "H1",
+        runId: "post-fix",
+      }),
+    }).catch(function () {});
+    // #endregion
+  }
+
   document.querySelectorAll(".view-tab").forEach((btn) => {
     btn.addEventListener("click", () => {
       currentView = btn.dataset.view;
@@ -143,6 +203,25 @@
 
   d3.csv("data/true_cost_fast_fashion.csv")
     .then((raw) => {
+      // #region agent log
+      var sampleCountries = [];
+      try {
+        sampleCountries = Array.from(new Set(raw.slice(0, 200).map(function (r) { return r.Country; }))).slice(0, 8);
+      } catch (e) {}
+      fetch("http://127.0.0.1:7721/ingest/3fc6fdd5-21c3-46a0-9e36-75f77779b17c", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "41b7ff" },
+        body: JSON.stringify({
+          sessionId: "41b7ff",
+          location: "main.js:csv.then",
+          message: "csv loaded",
+          data: { rowCount: raw.length, sampleCountries: sampleCountries },
+          timestamp: Date.now(),
+          hypothesisId: "H3",
+          runId: "pre-fix",
+        }),
+      }).catch(function () {});
+      // #endregion
       allData = raw.map((d) => {
         const row = {};
         for (const key of Object.keys(d)) {
@@ -169,7 +248,26 @@
       bindControls();
       applyFilters();
     })
-    .catch(() => {
+    .catch(function (err) {
+      // #region agent log
+      fetch("http://127.0.0.1:7721/ingest/3fc6fdd5-21c3-46a0-9e36-75f77779b17c", {
+        method: "POST",
+        headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "41b7ff" },
+        body: JSON.stringify({
+          sessionId: "41b7ff",
+          location: "main.js:csv.catch",
+          message: "csv failed",
+          data: {
+            errString: String(err),
+            errMessage: err && err.message,
+            stack: err && err.stack,
+          },
+          timestamp: Date.now(),
+          hypothesisId: "H1_H2",
+          runId: "pre-fix",
+        }),
+      }).catch(function () {});
+      // #endregion
       chartPanel.html(
         '<div class="py-16 text-center text-muted-foreground">' +
           "Could not load " +
@@ -197,6 +295,29 @@
       if (d.Year < yMin || d.Year > yMax) return false;
       return true;
     });
+
+    // #region agent log
+    fetch("http://127.0.0.1:7721/ingest/3fc6fdd5-21c3-46a0-9e36-75f77779b17c", {
+      method: "POST",
+      headers: { "Content-Type": "application/json", "X-Debug-Session-Id": "41b7ff" },
+      body: JSON.stringify({
+        sessionId: "41b7ff",
+        location: "main.js:applyFilters",
+        message: "filters applied",
+        data: {
+          brand: brand,
+          country: country,
+          yMin: yMin,
+          yMax: yMax,
+          filteredLen: filteredData.length,
+          allLen: allData.length,
+        },
+        timestamp: Date.now(),
+        hypothesisId: "H3",
+        runId: "pre-fix",
+      }),
+    }).catch(function () {});
+    // #endregion
 
     render();
   }

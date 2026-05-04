@@ -39,53 +39,54 @@
   <style type="text/tailwindcss">
     @layer base {
       :root {
-        --background: 0 0% 100%;
-        --foreground: 240 10% 3.9%;
-        --card: 0 0% 100%;
-        --card-foreground: 240 10% 3.9%;
-        --popover: 0 0% 100%;
-        --popover-foreground: 240 10% 3.9%;
-        --primary: 240 5.9% 10%;
-        --primary-foreground: 0 0% 98%;
-        --secondary: 240 4.8% 95.9%;
-        --secondary-foreground: 240 5.9% 10%;
-        --muted: 240 4.8% 95.9%;
-        --muted-foreground: 240 3.8% 46.1%;
-        --accent: 240 4.8% 95.9%;
-        --accent-foreground: 240 5.9% 10%;
-        --destructive: 0 84.2% 60.2%;
+        /* Dark forest green theme */
+        --background: 156 38% 8%;
+        --foreground: 132 28% 92%;
+        --card: 156 32% 11%;
+        --card-foreground: 132 28% 92%;
+        --popover: 156 34% 10%;
+        --popover-foreground: 132 28% 92%;
+        --primary: 146 52% 46%;
+        --primary-foreground: 156 40% 97%;
+        --secondary: 156 24% 17%;
+        --secondary-foreground: 132 25% 92%;
+        --muted: 156 22% 15%;
+        --muted-foreground: 132 12% 58%;
+        --accent: 156 28% 19%;
+        --accent-foreground: 132 28% 92%;
+        --destructive: 4 72% 48%;
         --destructive-foreground: 0 0% 98%;
-        --border: 240 5.9% 90%;
-        --input: 240 5.9% 90%;
-        --ring: 240 5.9% 10%;
+        --border: 156 20% 22%;
+        --input: 156 22% 18%;
+        --ring: 146 50% 48%;
         --radius: 0.5rem;
       }
       .dark {
-        --background: 240 10% 3.9%;
-        --foreground: 0 0% 98%;
-        --card: 240 10% 3.9%;
-        --card-foreground: 0 0% 98%;
-        --popover: 240 10% 3.9%;
-        --popover-foreground: 0 0% 98%;
-        --primary: 0 0% 98%;
-        --primary-foreground: 240 5.9% 10%;
-        --secondary: 240 3.7% 15.9%;
-        --secondary-foreground: 0 0% 98%;
-        --muted: 240 3.7% 15.9%;
-        --muted-foreground: 240 5% 64.9%;
-        --accent: 240 3.7% 15.9%;
-        --accent-foreground: 0 0% 98%;
-        --destructive: 0 62.8% 30.6%;
+        --background: 156 38% 8%;
+        --foreground: 132 28% 92%;
+        --card: 156 32% 11%;
+        --card-foreground: 132 28% 92%;
+        --popover: 156 34% 10%;
+        --popover-foreground: 132 28% 92%;
+        --primary: 146 52% 46%;
+        --primary-foreground: 156 40% 97%;
+        --secondary: 156 24% 17%;
+        --secondary-foreground: 132 25% 92%;
+        --muted: 156 22% 15%;
+        --muted-foreground: 132 12% 58%;
+        --accent: 156 28% 19%;
+        --accent-foreground: 132 28% 92%;
+        --destructive: 4 72% 48%;
         --destructive-foreground: 0 0% 98%;
-        --border: 240 3.7% 15.9%;
-        --input: 240 3.7% 15.9%;
-        --ring: 240 4.9% 83.9%;
+        --border: 156 20% 22%;
+        --input: 156 22% 18%;
+        --ring: 146 50% 48%;
         --radius: 0.5rem;
       }
     }
     @layer base {
       * { @apply border-border; }
-      body { @apply bg-background text-foreground; }
+      body { @apply bg-background text-foreground; color-scheme: dark; }
     }
   </style>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -249,18 +250,43 @@
       </p>
     </section>
 
-    <!-- Deployment -->
+    <!-- Sources & References -->
     <section class="mb-10">
-      <h2 class="mb-3 text-xl font-semibold tracking-tight">Deployment</h2>
-      <p class="mb-3 text-muted-foreground">
-        This project is hosted on GitHub Pages. To deploy your own copy:
+      <h2 class="mb-3 text-xl font-semibold tracking-tight">Sources &amp; References</h2>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Data</h3>
+      <p class="text-muted-foreground">
+        Khushi Yadav.
+        <a href="https://www.kaggle.com/datasets/khushikyad001/the-true-cost-of-fast-fashion-impact" target="_blank" rel="noopener" class="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">
+          The True Cost of Fast Fashion Impact</a>
+        (Kaggle dataset, MIT License).
       </p>
-      <ol class="list-decimal space-y-2 pl-6 text-muted-foreground">
-        <li>Create a public GitHub repository.</li>
-        <li>Push all project files (including the <code class="rounded bg-muted px-1.5 py-0.5 text-xs">data/</code> folder with the CSV).</li>
-        <li>In the repository Settings &rarr; Pages, set the source to the <strong class="font-semibold text-foreground">main</strong> branch root.</li>
-        <li>Your site will be live at <code class="rounded bg-muted px-1.5 py-0.5 text-xs">https://&lt;username&gt;.github.io/&lt;repo-name&gt;/</code>.</li>
-      </ol>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Libraries &amp; tooling</h3>
+      <ul class="list-disc space-y-2 pl-6 text-muted-foreground">
+        <li>
+          <a href="https://d3js.org/" target="_blank" rel="noopener" class="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">D3.js</a>
+          (v7), used for the visualization.
+        </li>
+        <li>
+          <a href="https://tailwindcss.com/" target="_blank" rel="noopener" class="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">Tailwind CSS</a>
+          (Play CDN) for layout and styling on this site.
+        </li>
+      </ul>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Typography</h3>
+      <p class="text-muted-foreground">
+        <a href="https://fonts.google.com/specimen/Inter" target="_blank" rel="noopener" class="font-medium text-foreground underline underline-offset-4 hover:text-foreground/80">Inter</a>
+        via Google Fonts.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Design</h3>
+      <p class="text-muted-foreground">
+        The overview-and-detail interaction pattern follows Shneiderman&rsquo;s visual information-seeking mantra (&ldquo;overview first, zoom and filter, details-on-demand&rdquo;). See:
+        Ben Shneiderman,
+        <cite class="not-italic">&ldquo;The Eyes Have It: A Task by Data Type Taxonomy for Information Visualizations,&rdquo;</cite>
+        <em class="text-foreground/90">Proc. IEEE Symposium on Visual Languages</em>, 1996.
+      </p>
     </section>
 
   </main>
