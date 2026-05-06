@@ -130,66 +130,145 @@
     <section class="mb-10">
       <h2 class="mb-3 text-xl font-semibold tracking-tight">Design Process</h2>
 
-      <h3 class="mb-2 mt-6 text-base font-medium">Initial Exploration</h3>
       <p class="text-muted-foreground">
-        The project began with examining the dataset columns to identify natural question clusters:
-        environmental cost vs. production scale, labor conditions vs. brand, and sustainability scores vs.
-        social-media sentiment. Early paper sketches explored a small-multiples layout (one chart per brand),
-        a parallel-coordinates view, and a single scatterplot with dropdown-driven axes.
+        When I first sat down with the Fast Fashion dataset, the sheer size and scope of it made the design
+        challenge immediately clear. With dozens of attributes spanning environmental impact, labor conditions,
+        and financial data, trying to visualize everything at once would produce something overwhelming and
+        unreadable. So my first step was simply to read through the data carefully and ask: what story does
+        this actually want to tell?
+      </p>
+      <p class="mt-3 text-muted-foreground">
+        That process of exploration helped me narrow the focus down to three distinct angles I could build a
+        visualization around: environmental cost (CO&#8322; emissions, water consumption, and waste per garment),
+        human cost (worker wages, labor conditions, and hours worked), and financial cost (retail pricing
+        versus true production cost). Each angle was compelling on its own, but I had to pick one to start.
+        I chose environmental cost, both because the data felt richest there and because it connected to a
+        question that felt genuinely urgent: which brands and garment types are doing the most damage to the
+        planet, and by how much?
       </p>
 
-      <div class="my-6 rounded-lg border-2 border-dashed p-8 text-center text-sm text-muted-foreground">
-        [Insert scanned sketch images here &mdash; e.g., <code class="rounded bg-muted px-1.5 py-0.5 text-xs">sketches/sketch-1.jpg</code>]
-      </div>
-
-      <h3 class="mb-2 mt-6 text-base font-medium">Iteration</h3>
+      <h3 class="mb-2 mt-6 text-base font-medium">First Attempts</h3>
       <p class="text-muted-foreground">
-        The small-multiples approach was discarded because 6+ brands times 20+ numeric columns made the grid
-        unwieldy. Parallel coordinates were explored but proved difficult to brush precisely with many
-        overlapping polylines. The final design settled on a <strong class="font-semibold text-foreground">brushable scatterplot</strong> with
-        user-selectable axes and color encoding &mdash; a flexible yet focused layout that lets the viewer pose and
-        answer their own comparison questions.
+        My initial instinct was to use a brushable scatterplot &mdash; a chart type I found in the D3 gallery
+        that plots two variables on X and Y axes while encoding a third variable through dot size. The idea
+        was to map CO&#8322; on one axis, water consumption on the other, and use dot size to represent waste. In
+        theory, this would let a viewer see all three environmental dimensions simultaneously and brush over
+        clusters of points to filter the view.
+      </p>
+      <p class="mt-3 text-muted-foreground">
+        In practice, it was harder to read than I expected. The dots overlapped significantly, the
+        three-variable encoding felt cognitively heavy, and it was not immediately obvious what the viewer was
+        supposed to take away from it. The visualization technically worked, but it did not communicate.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Finding a Better Model</h3>
+      <p class="text-muted-foreground">
+        At that point I stepped back and looked for inspiration in how other data-driven sites handled similar
+        complexity. The site that stuck with me most was Realtime Inequality, which does something clever:
+        rather than forcing the viewer to hold multiple questions in their head at once, it gives them one
+        clear view at a time while making it easy to switch between different lenses on the same underlying
+        data. The interface feels guided without being restrictive.
+      </p>
+      <p class="mt-3 text-muted-foreground">
+        That reframing changed how I thought about my own project. Instead of picking just one of the three
+        cost angles and losing the others entirely, I could show all three &mdash; environmental, human, and
+        financial &mdash; but in a way that kept each view clean and focused. The viewer is not overwhelmed because
+        they are only ever looking at one dimension at a time, but the full picture is always within reach.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Refining the Design</h3>
+      <p class="text-muted-foreground">
+        Once I decided to show all three dimensions, I made several deliberate choices to improve readability
+        across the board. For the environmental cost view, I replaced the scatterplot with a grouped bar chart.
+        Bar charts are one of the most intuitive visual formats available: viewers can instantly compare
+        heights across categories without needing to decode overlapping dots or interpret bubble sizes. For
+        comparing CO&#8322;, water, and waste across different brands, a bar chart made the differences legible at a
+        glance in a way the scatterplot never quite achieved.
+      </p>
+      <p class="mt-3 text-muted-foreground">
+        For the human cost and financial cost views, I applied the same single-year default and expandable
+        range approach, but returned to the scatterplot format, this time with a key improvement. Rather than
+        relying solely on color to distinguish brands, I encoded brand identity through distinct shapes. Color
+        alone can be difficult to track when multiple brands cluster together in the same region of a chart,
+        but pairing color with shape gives the viewer two simultaneous visual cues to latch onto. A viewer who
+        spots a triangle always knows which brand they are looking at, even when the dots are dense. This made
+        it noticeably easier to follow individual brands across the chart without constantly cross-referencing
+        the legend.
+      </p>
+      <p class="mt-3 text-muted-foreground">
+        Across all three views, I also added a key metrics panel that displays contextual averages alongside
+        the charts. One limitation of raw comparison charts is that they tell you which brand is worse than
+        another but not whether any of them are actually bad in absolute terms. The key metrics section
+        addresses that by grounding the visual comparisons in real-world averages, giving the viewer a
+        meaningful benchmark and making the severity of the worst offenders much harder to ignore.
+      </p>
+      <p class="mt-3 text-muted-foreground">
+        For the overall layout, I defaulted every view to a single year rather than displaying the full time
+        range at once. Showing all years simultaneously added visual noise without adding much insight.
+        Anchoring to one year gives the viewer a clear baseline, and they can expand the range themselves if
+        they want to explore trends over time.
       </p>
     </section>
 
     <!-- Design Rationale -->
     <section class="mb-10">
-      <h2 class="mb-3 text-xl font-semibold tracking-tight">Design Rationale</h2>
-
-      <h3 class="mb-2 mt-6 text-base font-medium">Chart Type &mdash; Brushable Scatterplot</h3>
+      <h2 class="mb-3 text-xl font-semibold tracking-tight">Rationale of Design Choices</h2>
       <p class="text-muted-foreground">
-        A scatterplot was chosen because the core questions involve correlations between two continuous
-        variables (e.g., production volume vs. carbon emissions). The brush interaction (D3
-        <code class="rounded bg-muted px-1.5 py-0.5 text-xs">d3.brush()</code>) lets users select a rectangular region and instantly see summary statistics
-        for that subset, supporting rapid hypothesis testing without leaving the page.
+        Every visual decision in this project was made with one goal in mind: reduce the cognitive effort
+        required to extract a meaningful insight.
       </p>
 
-      <h3 class="mb-2 mt-6 text-base font-medium">Axis Dropdowns</h3>
+      <h3 class="mb-2 mt-6 text-base font-medium">Chart Type Per Dimension</h3>
       <p class="text-muted-foreground">
-        With 21 numeric attributes, hard-coding a single pair would limit exploration. Dropdown menus for
-        both X and Y axes let the user pivot freely &mdash; from environmental metrics to labor metrics to social
-        attention &mdash; turning one chart into dozens of possible views.
+        The environmental cost view uses a grouped bar chart because the core question it answers is a
+        comparison question: how do brands rank against each other on CO&#8322;, water, and waste? Bar charts are
+        the single most effective chart type for direct magnitude comparison. The human and financial cost
+        views use scatterplots because those questions are relational, and scatterplots are built for revealing
+        relationships between two continuous variables simultaneously.
       </p>
 
       <h3 class="mb-2 mt-6 text-base font-medium">Color Encoding</h3>
       <p class="text-muted-foreground">
-        Color is mapped to a categorical field (Brand by default, switchable to Country or Sentiment Label).
-        The Tableau-10 palette was chosen for perceptual distinctness. Color answers the &ldquo;which group?&rdquo;
-        question at a glance and clusters in the scatterplot become immediately identifiable.
+        Color is used exclusively to encode brand identity, not to encode a data value. This was a deliberate
+        choice. When color is used to encode a quantitative variable (like a heatmap), it forces the viewer to
+        mentally map a hue back to a number, which adds friction. Since brand identity is categorical and
+        already labeled in a legend, color here serves as a fast recognition shortcut: once a viewer
+        associates a color with a particular brand, they can track that brand across the chart instantly
+        without reading any text.
       </p>
 
-      <h3 class="mb-2 mt-6 text-base font-medium">Side Panel and Summary Statistics</h3>
+      <h3 class="mb-2 mt-6 text-base font-medium">Shape Encoding</h3>
       <p class="text-muted-foreground">
-        The right-hand summary panel shows aggregate statistics (mean carbon, water, wage, sustainability,
-        landfill, ethical rating) for whatever subset is currently brushed, or the entire filtered dataset
-        when no brush is active. This dual-level detail (overview + selection) follows Shneiderman&rsquo;s
-        &ldquo;overview first, zoom and filter, details on demand&rdquo; mantra.
+        On the scatterplots, brand identity is encoded through both color and shape. This redundant encoding is
+        intentional. Color alone fails when points overlap or when a viewer has color vision deficiency. Shape
+        provides a second, independent visual channel that carries the same information. A circle, triangle,
+        and square remain distinguishable even when rendered small, clustered, or printed in grayscale. Using
+        both together means no viewer is left without a reliable way to tell brands apart.
       </p>
 
-      <h3 class="mb-2 mt-6 text-base font-medium">Filters</h3>
+      <h3 class="mb-2 mt-6 text-base font-medium">Single-Year Default With Expand Option</h3>
       <p class="text-muted-foreground">
-        Top-bar filters for Brand, Country, and Year range let users narrow the dataset before brushing.
-        This prevents information overload when the user cares about a single brand or time period.
+        Defaulting to one year reduces the number of data points visible at first load, which lowers visual
+        clutter and lets the viewer orient themselves before adding complexity. The ability to expand to
+        multiple years is preserved so that viewers who want to explore trends over time are not blocked from
+        doing so, but that complexity is opt-in rather than imposed.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Key Metrics Panel Placement</h3>
+      <p class="text-muted-foreground">
+        The key metrics panel is placed adjacent to each chart rather than at the top of the page. This keeps
+        the contextual average close to the visual it relates to, so the viewer does not have to remember a
+        number they saw elsewhere on the page. Proximity reinforces the connection between the benchmark and
+        the chart it anchors.
+      </p>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Tab-Based Navigation Between Dimensions</h3>
+      <p class="text-muted-foreground">
+        Arranging the three cost dimensions as tabs rather than stacking all three charts vertically was a
+        layout decision rooted in focus. Stacking all charts would give the viewer everything at once, but it
+        would also create a long scroll where the environmental chart might be forgotten by the time the
+        viewer reaches the financial one. Tabs enforce one view at a time, which mirrors how a viewer would
+        naturally think through one question before moving to the next.
       </p>
     </section>
 
@@ -232,22 +311,17 @@
     <!-- Video -->
     <section class="mb-10">
       <h2 class="mb-3 text-xl font-semibold tracking-tight">Video Demonstration</h2>
-      <p class="mb-4 text-muted-foreground">
-        A 2&ndash;4 minute screen-capture video with narration showing the visualization in use.
-      </p>
-      <div class="relative overflow-hidden rounded-lg bg-muted" style="padding-bottom:56.25%">
-        <!-- Replace YOUR_VIDEO_ID with your YouTube video ID after recording -->
-        <iframe
-          class="absolute inset-0 h-full w-full"
-          src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-          title="Visualization Demo"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-        ></iframe>
+      <div class="overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+        <video
+          class="aspect-video w-full max-h-[70vh] bg-black object-contain"
+          controls
+          playsinline
+          preload="metadata"
+          title="Visualization demonstration"
+        >
+          <source src="video/demonstration.mp4" type="video/mp4" />
+        </video>
       </div>
-      <p class="mt-2 text-xs text-muted-foreground">
-        Replace <code class="rounded bg-muted px-1.5 py-0.5 text-xs">YOUR_VIDEO_ID</code> in the page source with your actual YouTube video ID after uploading.
-      </p>
     </section>
 
     <!-- Sources & References -->
