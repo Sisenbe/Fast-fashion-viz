@@ -110,6 +110,7 @@
     <header class="mb-10">
       <h1 class="text-3xl font-bold tracking-tight">Project Documentation</h1>
       <p class="mt-2 text-muted-foreground">Interactive visualization of the environmental, labor, and social costs of fast fashion, built with D3.js.</p>
+      <p class="mt-3 text-xs font-medium tracking-wide text-muted-foreground">By Shannon Isenberg</p>
     </header>
 
     <!-- Dataset -->
@@ -275,37 +276,79 @@
     <!-- Findings -->
     <section class="mb-10">
       <h2 class="mb-3 text-xl font-semibold tracking-tight">Findings</h2>
-
-      <h3 class="mb-2 mt-6 text-base font-medium">Finding 1: Production Volume and Carbon Emissions</h3>
       <p class="text-muted-foreground">
-        Setting X&nbsp;=&nbsp;Production (tonnes/mo) and Y&nbsp;=&nbsp;Carbon Emissions (tCO&#8322;e) reveals a roughly positive
-        relationship, but with substantial scatter &mdash; some brands achieve high output with comparatively
-        lower emissions, while others show disproportionately high emissions at moderate production levels.
+        The screenshots and interpretations below use the following filters on the visualization:
+        <strong class="font-semibold text-foreground">Brand</strong> set to all brands,
+        <strong class="font-semibold text-foreground">Country</strong> set to USA,
+        and <strong class="font-semibold text-foreground">year range</strong> from 2020 to 2024
+        (145 records in this slice).
       </p>
-      <div class="my-6 rounded-lg border-2 border-dashed p-8 text-center text-sm text-muted-foreground">
-        [Insert screenshot of Production vs. Carbon scatterplot here]
-      </div>
 
-      <h3 class="mb-2 mt-6 text-base font-medium">Finding 2: Sustainability vs. Environmental Cost</h3>
+      <h3 class="mb-2 mt-6 text-base font-medium">Finding 1: Carbon emissions vary more across brands than water usage or landfill waste</h3>
       <p class="text-muted-foreground">
-        Plotting Sustainability Score against Env Cost Index shows an expected negative trend: higher
-        sustainability scores correlate with lower environmental cost indices. However, the relationship
-        is noisy, suggesting that sustainability scores alone do not fully capture real environmental
-        impact.
+        Before using the visualization, I assumed all three environmental dimensions would tell roughly the same
+        story &mdash; that whichever brand polluted most would do so across the board. The bar chart challenged that.
+        H&amp;M and Zara stood out clearly on carbon emissions at 10,868.51 and 10,547.14 tCO&#8322;e respectively, while
+        Uniqlo sat notably lower at 9,371.48 &mdash; a gap of nearly 1,500 units. But on landfill waste and water usage,
+        the story flattened out considerably. Every brand&rsquo;s water bars end within a few units of each other, and
+        landfill waste tells the same story, ranging only from 758 to 808 tonnes. This matters because it suggests
+        carbon output is where brand-level decisions actually diverge, while waste and water consumption may be more
+        structural problems baked into the industry as a whole &mdash; a distinction that&rsquo;s invisible in a spreadsheet
+        but obvious the moment you see the bar lengths side by side.
       </p>
-      <div class="my-6 rounded-lg border-2 border-dashed p-8 text-center text-sm text-muted-foreground">
-        [Insert screenshot here]
-      </div>
+      <figure class="my-6 overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+        <img
+          src="images/findings/environmental-usa-2020-2024.png"
+          alt="Environmental cost view: horizontal bars for carbon, water, and landfill by brand with key metrics panel for USA 2020–2024."
+          class="w-full"
+          loading="lazy"
+        />
+        <figcaption class="border-t border-border px-3 py-2 text-xs text-muted-foreground">
+          Environmental Cost tab &mdash; USA, all brands, 2020&ndash;2024.
+        </figcaption>
+      </figure>
 
-      <h3 class="mb-2 mt-6 text-base font-medium">Finding 3: Worker Wages Across Countries</h3>
+      <h3 class="mb-2 mt-6 text-base font-medium">Finding 3: No single brand stands apart from the others on how it treats its workers</h3>
       <p class="text-muted-foreground">
-        Using the Country color encoding with Avg Worker Wage on the Y-axis highlights geographic pay
-        disparities: records from certain countries cluster at markedly lower wage levels. Brushing
-        these clusters confirms that low-wage records also tend to have higher working hours per week.
+        I expected the human cost scatterplot to reveal at least one brand clustering in a noticeably better region
+        &mdash; higher wages, fewer hours, something. Instead, the five shapes are thoroughly mixed across the entire
+        chart with no brand occupying clearly better territory than another. Workers across all brands are logging
+        between 40 and nearly 70 hours per week, often at wages that fall well below what the key metrics panel
+        shows as the average. The finding isn&rsquo;t a number &mdash; it&rsquo;s the absence of separation between brands that a
+        consumer might assume are meaningfully different.
       </p>
-      <div class="my-6 rounded-lg border-2 border-dashed p-8 text-center text-sm text-muted-foreground">
-        [Insert screenshot here]
-      </div>
+      <figure class="my-6 overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+        <img
+          src="images/findings/human-cost-usa-2020-2024.png"
+          alt="Human cost scatterplot: average worker wage versus working hours per week, USA filter, brands shown as distinct shapes."
+          class="w-full"
+          loading="lazy"
+        />
+        <figcaption class="border-t border-border px-3 py-2 text-xs text-muted-foreground">
+          Human Cost tab &mdash; USA, all brands, 2020&ndash;2024.
+        </figcaption>
+      </figure>
+
+      <h3 class="mb-2 mt-6 text-base font-medium">Finding 2: Paying more for a garment has no reliable connection to how sustainably it was made</h3>
+      <p class="text-muted-foreground">
+        Going into this project I assumed price would serve as at least a rough signal of sustainability &mdash; that
+        brands charging more had invested more in responsible production. The financial cost scatterplot made that
+        assumption hard to hold. Points for every brand scatter across the full range of the sustainability axis at
+        nearly every price point, with no upward trend to speak of. A $30 item is no more likely to score well on
+        sustainability than a $12 one, and the average sustainability score across all brands sits below the halfway
+        mark. The chart turns what might sound like a surprising statistical claim into something you can see instantly.
+      </p>
+      <figure class="my-6 overflow-hidden rounded-lg border border-border bg-card shadow-sm">
+        <img
+          src="images/findings/financial-price-sustainability-usa-2020-2024.png"
+          alt="Financial cost scatterplot: average item price versus sustainability score, colored by brand."
+          class="w-full"
+          loading="lazy"
+        />
+        <figcaption class="border-t border-border px-3 py-2 text-xs text-muted-foreground">
+          Financial Cost tab &mdash; USA, all brands, 2020&ndash;2024.
+        </figcaption>
+      </figure>
     </section>
 
     <!-- Video -->
